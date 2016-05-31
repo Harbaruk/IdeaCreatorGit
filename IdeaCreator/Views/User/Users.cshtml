@@ -1,0 +1,29 @@
+﻿@using IdeaCreator.Models
+@model UserViewModel
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<div style="margin-top:70px"></div>
+<h2>Users</h2>
+
+@foreach (var user in Model.Users)
+{
+    <div></div>
+   <div class="well">
+    <div class="row">
+        <div class="col-xs-10">
+            <h3>
+                <strong>@user.Username</strong>
+            </h3>
+            <h4>
+                <strong>@user.Email</strong>
+            </h4>
+        </div>
+        <div class="col-xs-2">
+        </div>
+    </div>
+</div>
+}
+
