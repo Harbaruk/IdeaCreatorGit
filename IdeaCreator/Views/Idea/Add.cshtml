@@ -1,0 +1,33 @@
+﻿@model IdeaCreator.Models.IdeaAdditionModel
+@{
+    ViewBag.Title = "Add";
+}
+
+<div style="margin-top:70px"></div>
+
+<h2>Add</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div>
+        @Html.ValidationSummary(true, "")
+
+        <h2 class="bg-success" style="text-align:center"> Назва </h2>
+        
+        <p style="text-align:center">@Html.TextBoxFor(model => model.Name, new { style = "width:700px" })</p>
+        <div>
+            <br />
+            <br />
+        </div>
+        <h2 class="bg-success" style="text-align:center"> Опис </h2>
+        <p style="text-align:center">@Html.TextAreaFor(model => model.Description, new { style = "width:700px;" })</p>
+        
+        <p><input type="submit" value="Додати"  class="btn-primary" style="margin-left:405px; width:100px"/></p>
+    </div>
+}
+
+
+
+

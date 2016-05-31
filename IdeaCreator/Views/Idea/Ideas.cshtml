@@ -7,7 +7,12 @@
 <div style="margin-top:70px"></div>
 
 <h2>Ideas</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+        <p><input class="btn btn-primary btn-lg" type="submit" value="Додати ідею" /></p>
 
+}
 @foreach (var idea in Model.Ideas)
 {
     @Html.Partial("_IdeaSummary", idea)
@@ -15,7 +20,7 @@
 
 <div>
 
-   @Html.PageLinks(Model.PagingInfo, x => Url.Action("Idea", new { page = x }))
+   @Html.PageLinks(Model.PagingInfo, x => Url.Action("Ideas", new { page = x }))
 </div>
 
 

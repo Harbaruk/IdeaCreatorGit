@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.Owin;
 using IdeaCreator.Models;
 using System.Security.Claims;
 using Microsoft.Owin.Security;
+using IdeaCreator.Models.Concrete;
  
 
 namespace IdeaCreator.Controllers
@@ -33,7 +34,12 @@ namespace IdeaCreator.Controllers
         {
             if (ModelState.IsValid)
             {
+                EFContext a = new EFContext();
+                a.Users.Add(new Models.Entities.User() { Email = model.Email, Username = model.Nickname });
+                a.SaveChanges();
+
                 ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nickname = model.Nickname };
+                IdeaCreator.Models.Entities.User temp = new Models.Entities.User();
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -58,8 +64,9 @@ namespace IdeaCreator.Controllers
             }
         }
 
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login(string returnUrl,bool FromIdea = false)
         {
+            
             ViewBag.returnUrl = returnUrl;
             return View();
         }
@@ -73,7 +80,7 @@ namespace IdeaCreator.Controllers
                 ApplicationUser user = await UserManager.FindAsync(model.Email, model.Password);
                 if (user == null)
                 {
-                    ModelState.AddModelError("", "Неверный логин или пароль.");
+                    ModelState.AddModelError("", "Невірний логін або пароль.");
                 }
                 else
                 {
@@ -117,7 +124,7 @@ namespace IdeaCreator.Controllers
                     return RedirectToAction("Logout", "Account");
                 }
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Ideas", "Idea");
         }
 
         public async Task<ActionResult> Edit()
@@ -138,19 +145,23 @@ namespace IdeaCreator.Controllers
             if (user != null)
             {
                 user.Nickname = model.Nickname;
+
+                EFContext cont = new EFContext();
+                cont.Users.Where(x => x.Email == User.Identity.Name).ToList()[0].Username = model.Nickname;
+
                 IdentityResult result = await UserManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Ideas", "Idea");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Что-то пошло не так");
+                    ModelState.AddModelError("", "Щось не так");
                 }
             }
             else
             {
-                ModelState.AddModelError("", "Пользователь не найден");
+                ModelState.AddModelError("", "Користувача не знайдено");
             }
 
             return View(model);

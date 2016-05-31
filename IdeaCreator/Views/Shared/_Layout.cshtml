@@ -21,8 +21,9 @@
                  @{
                      if (User.Identity.IsAuthenticated)
                      {
-                         @Html.ActionLink("Account", "Edit", "Account", null, new { @class = "navbar-brand navbar-right" })
-                         @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "navbar-brand navbar-right" })
+                         @Html.ActionLink("Account", "Edit", "Account", null, new { @class = "navbar-brand " })
+                         @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "navbar-brand navbar-right"  }) 
+                     
                      }
                      else
                      {

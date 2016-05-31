@@ -14,7 +14,7 @@
             </h3>
             <div>
                 <span class="lead">
-                    @Model.Description
+                        @Model.Description
                 </span>
             </div>
         </div>
@@ -36,4 +36,7 @@
             </h3>
         </div>
     </div>
+</div>
+<div>
+    @Html.Partial("_Comment", IdeaCreator.Models.ViewModels.IdeaViewModel.GetComments(Model.ID))
 </div>

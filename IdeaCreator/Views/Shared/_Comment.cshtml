@@ -1,0 +1,26 @@
+﻿@using IdeaCreator.Models.ViewModels
+@model List<IdeaCreator.Models.Entities.Comment>
+
+<br />
+<div>
+    <h2 class="bg-success" style="text-align:center"> Коментарі </h2>
+</div>
+<br />
+@foreach (var i in Model)
+{
+<div class="well">
+    <div class="row">
+        <div class="col-xs-10">
+            <h5>
+                <strong>@i.Username</strong>
+            </h5>
+            <div>
+                <span class="lead">
+                        @i.Description
+                </span>
+            </div>
+        </div>
+        </div>
+</div>
+}
+
