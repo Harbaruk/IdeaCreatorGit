@@ -1,0 +1,21 @@
+﻿@using IdeaCreator.HtmlHelpers
+@model IdeaCreator.Models.ViewModels.IdeaViewModel
+
+@{
+    ViewBag.Title = "Ideas";
+}
+<div style="margin-top:70px"></div>
+
+<h2>Ideas</h2>
+
+@foreach (var idea in Model.Ideas)
+{
+    @Html.Partial("_IdeaSummary", idea)
+}
+
+<div>
+
+   @Html.PageLinks(Model.PagingInfo, x => Url.Action("Idea", new { page = x }))
+</div>
+
+
