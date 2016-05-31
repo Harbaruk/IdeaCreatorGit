@@ -1,0 +1,27 @@
+﻿@model IEnumerable<IdeaCreator.Models.ApplicationRole>
+
+@{
+    ViewBag.Title = "Роли";
+}
+
+<div style="margin-top:70px"></div>
+<h2>Ролі</h2>
+<table class="table">
+    <tr>
+        <th>Назва</th>
+        <th>Опис</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Description</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
