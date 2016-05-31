@@ -1,0 +1,25 @@
+﻿@model IdeaCreator.Models.EditModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 style="margin-top: 70px">Редагувати дані профілю</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+     
+    <div style="margin-top: 30px">
+        @Html.ValidationSummary(true, "")
+        <div>
+            <p>Nickname : @Html.EditorFor(model => model.Nickname)</p>
+        </div>
+
+        <div>
+            <div>
+                <input type="submit" value="Зберегти" />
+            </div>
+        </div>
+    </div>
+}

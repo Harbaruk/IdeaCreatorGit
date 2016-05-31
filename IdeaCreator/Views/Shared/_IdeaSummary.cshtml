@@ -1,0 +1,41 @@
+﻿@model IdeaCreator.Models.Entities.Idea
+
+<div class="well">
+    <div class="row">
+        <div class="col-xs-10">
+            <h3>
+                <strong>@Model.Caption</strong>
+            </h3>
+            <div>
+                <span class="lead">
+                    @Model.Description
+                </span>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <h3>
+                @if (User.Identity.IsAuthenticated)
+                     {
+                    <button type="button" class="btn btn-primary btn-lg" onclick="@("window.location.href='" + @Url.Action("Show", "Idea", new {id = Model.ID}) + "'")">
+                        <span class="glyphicon glyphicon-search" aria-hidden="false"></span> Show
+                    </button>
+                    }
+                    else
+                {<button type="button" disabled class="btn btn-primary btn-lg" onclick="@("window.location.href='" + @Url.Action("Show", "Idea", new {id = Model.ID}) + "'")">
+                        <span class="glyphicon glyphicon-search" aria-hidden="false"></span> Show
+                    </button>
+                }
+            </h3>
+        </div>
+        <div class="col-xs-2">
+            <h3>
+                <button type="button" class="btn bg-success btn-lg" onclick="@("window.location.href='" + @Url.Action("Show", "Idea", new {id = Model.ID}) +"'")">
+                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="false"></span> Plus
+                </button>
+                <button type="button" class="btn bg-danger btn-lg" onclick="@("window.location.href='" + @Url.Action("Show", "Idea", new {id = Model.ID}) +"'")">
+                    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="false"></span> Minus ()
+                </button>
+            </h3>
+        </div>
+</div>
+    </div>
