@@ -9,6 +9,7 @@ using IdeaCreator.Models.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
 using IdeaCreator.HtmlHelpers;
+using IdeaCreator.Models;
 
 namespace UnitTests
 {
@@ -63,5 +64,6 @@ namespace UnitTests
                 @"<a class=""btn btn-default btn-primary selected"" href=""Page2"">2</a>" +
             @"<a class=""btn btn-default"" href=""Page3"">3</a>", result.ToString());
         }
+
     }
 }

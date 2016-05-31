@@ -1,9 +1,13 @@
-﻿using IdeaCreator.Models.Abstract;
+﻿using IdeaCreator.Models;
+using IdeaCreator.Models.Abstract;
+using IdeaCreator.Models.Concrete;
 using IdeaCreator.Models.Entities;
 using IdeaCreator.Models.ViewModels;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -37,6 +41,12 @@ namespace IdeaCreator.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> Ideas()
+        {
+            return RedirectToAction("Add", "Idea");
+        }
+
         public ViewResult Show(string id)
         {
             string a = id;
@@ -50,6 +60,43 @@ namespace IdeaCreator.Controllers
 
 
             return View(res);
+        }
+
+        public ActionResult Add()
+        {
+            IdeaAdditionModel a = new IdeaAdditionModel();
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            else
+                return View();
+       }
+
+        
+        [HttpPost]
+        public async Task<ActionResult> Add(IdeaAdditionModel model)
+        {
+            
+            EFContext cont = new EFContext();
+            int a = cont.Users.Where(x=>x.Email==User.Identity.Name).ToList()[0].ID;
+            if (ModelState.IsValid)
+            {
+                Idea res = new Idea
+                {
+                    Caption = model.Name,
+                    Description = model.Description,
+                    UserID = a,
+                    VotingID = 1
+                };
+                
+                cont.Ideas.Add(res);
+                cont.SaveChanges();
+            }
+
+            return RedirectToAction("Ideas", "Idea");
+            //return View(model);
         }
 	}
 }

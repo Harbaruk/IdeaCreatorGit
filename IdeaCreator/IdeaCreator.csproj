@@ -203,6 +203,7 @@
     <Compile Include="Models\Entities\PagingInfo.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Entities\Voting.cs" />
+    <Compile Include="Models\IdeaAdditionModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\UserIdentity.cs" />
@@ -223,6 +224,8 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\Create.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Idea\Add.cshtml" />
+    <Content Include="Views\Shared\_Comment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
